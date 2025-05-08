@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Juego de Funciones</title>
+  <link rel="manifest" href="manifest.json" />
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .game-container {
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+    }
+    h1 {
+      font-size: 1.5em;
+      margin-bottom: 15px;
+    }
+    button {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      padding: 15px;
+      font-size: 1.2em;
+      border-radius: 10px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    #feedback {
+      margin-top: 20px;
+      font-size: 1.2em;
+    }
+  </style>
+</head>
+<body>
+  <div class="game-container">
+    <h1>¿Qué tipo de función es?</h1>
+    <p id="pregunta">Cargando...</p>
+    <button onclick="verificar('exponencial')">Exponencial</button>
+    <button onclick="verificar('trigonométrica')">Trigonométrica</button>
+    <div id="feedback"></div>
+    <button onclick="nuevaPregunta()">Nueva Pregunta</button>
+  </div>
+
+  <script>
+    const funciones = [
+      { expresion: "f(x) = sin(x)", tipo: "trigonométrica" },
+      { expresion: "f(x) = cos(x)", tipo: "trigonométrica" },
+      { expresion: "f(x) = tan(x)", tipo: "trigonométrica" },
+      { expresion: "f(x) = 2^x", tipo: "exponencial" },
+      { expresion: "f(x) = e^x", tipo: "exponencial" },
+      { expresion: "f(x) = (1/2)^x", tipo: "exponencial" }
+    ];
+
+    let funcionActual;
+
+    function nuevaPregunta() {
+      const randomIndex = Math.floor(Math.random() * funciones.length);
+      funcionActual = funciones[randomIndex];
+      document.getElementById("pregunta").textContent = `¿La función "${funcionActual.expresion}" es...?`;
+      document.getElementById("feedback").textContent = "";
+    }
+
+    function verificar(respuesta) {
+      const correcto = funcionActual.tipo;
+      const feedback = document.getElementById("feedback");
+      if (respuesta === correcto) {
+        feedback.textContent = "✅ ¡Correcto!";
+        feedback.style.color = "green";
+      } else {
+        feedback.textContent = `❌ Incorrecto. Es ${correcto}.`;
+        feedback.style.color = "red";
+      }
+    }
+
+    nuevaPregunta();
+
+    // Registrar service worker (para convertirlo en app instalable)
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js').then(() => {
+        console.log("✅ Service Worker registrado");
+      });
+    }
+  </script>
+</body>
+</html>
