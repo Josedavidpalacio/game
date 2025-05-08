@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¿Función Exponencial o Trigonométrica?</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; background-color: #f0f0f0; padding: 20px; }
+    .card { background: white; padding: 30px; border-radius: 15px; max-width: 500px; margin: auto; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+    button { margin: 10px; padding: 15px 25px; font-size: 18px; border-radius: 10px; border: none; background-color: #007bff; color: white; cursor: pointer; }
+    button:hover { background-color: #0056b3; }
+    #feedback { margin-top: 20px; font-size: 18px; font-weight: bold; }
+  </style>
+<link rel="manifest" href="manifest.json">
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js')
+      .then(() => console.log('Service Worker registrado'))
+      .catch(error => console.error('Error:', error));
+  }
+</script>
+
+</head>
+<body>
+  <div class="card">
+    <h1>¿Función Exponencial o Trigonométrica?</h1>
+    <p id="pregunta">¿La función "f(x) = sin(x)" es exponencial o trigonométrica?</p>
+    <button onclick="verificar('exponencial')">Exponencial</button>
+    <button onclick="verificar('trigonométrica')">Trigonométrica</button>
+    <div id="feedback"></div>
+    <button onclick="nuevaPregunta()">➕ Nueva pregunta</button>
+  </div>
+
+  <script>
+    const funciones = [
+      { expresion: "f(x) = sin(x)", tipo: "trigonométrica" },
+      { expresion: "f(x) = cos(x)", tipo: "trigonométrica" },
+      { expresion: "f(x) = tan(x)", tipo: "trigonométrica" },
+      { expresion: "f(x) = 2^x", tipo: "exponencial" },
+      { expresion: "f(x) = e^x", tipo: "exponencial" },
+      { expresion: "f(x) = (1/2)^x", tipo: "exponencial" }
+    ];
+
+    let funcionActual;
+
+    function nuevaPregunta() {
+      const index = Math.floor(Math.random() * funciones.length);
+      funcionActual = funciones[index];
+      document.getElementById("pregunta").textContent = `¿La función "${funcionActual.expresion}" es exponencial o trigonométrica?`;
+      document.getElementById("feedback").textContent = "";
+    }
+
+    function verificar(respuesta) {
+      const correcto = funcionActual.tipo;
+      const feedback = document.getElementById("feedback");
+      if (respuesta === correcto) {
+        feedback.textContent = "✅ ¡Correcto!";
+        feedback.style.color = "green";
+      } else {
+        feedback.textContent = `❌ Incorrecto. Era una función ${correcto}.`;
+        feedback.style.color = "red";
+      }
+    }
+
+    // Iniciar con una pregunta
+    nuevaPregunta();
+  </script>
+</body>
+</html>

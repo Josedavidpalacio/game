@@ -1,0 +1,20 @@
+{
+  "name": "Juego de Funciones",
+  "short_name": "Funciones",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#007bff",
+  "icons": [
+    {
+      "src": "https://th.bing.com/th/id/R.c4f5d24425c34edd681b18c0a50bcffb?rik=Q6MsK%2fp9NRKOQQ&pid=ImgRaw&r=0",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://th.bing.com/th/id/R.c4f5d24425c34edd681b18c0a50bcffb?rik=Q6MsK%2fp9NRKOQQ&pid=ImgRaw&r=0",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
