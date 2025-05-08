@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¿Función Exponencial o Trigonométrica?</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #cce5ff;
+      padding: 20px;
+    }
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      max-width: 600px;
+      margin: auto;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      border: 2px solid #3399ff;
+    }
+    button {
+      margin: 10px;
+      padding: 15px 25px;
+      font-size: 18px;
+      border-radius: 10px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    #feedback {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    #explicacion {
+      margin-top: 10px;
+      font-size: 16px;
+      color: #333;
+    }
+    .decoracion {
+      font-size: 30px;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="decoracion">📐📊➗ Funciones Matemáticas 📈📘✏️</div>
+    <h1>¿Función Exponencial o Trigonométrica?</h1>
+    <p id="pregunta">¿La función "f(x) = sin(x)" es exponencial o trigonométrica?</p>
+    <button onclick="verificar('exponencial')">Exponencial</button>
+    <button onclick="verificar('trigonométrica')">Trigonométrica</button>
+    <div id="feedback"></div>
+    <div id="explicacion"></div>
+    <button onclick="nuevaPregunta()">➕ Nueva pregunta</button>
+  </div>
+
+  <script>
+    const funciones = [
+      { expresion: "f(x) = sin(x)", tipo: "trigonométrica", explicacion: "La función seno es una función trigonométrica que depende del ángulo." },
+      { expresion: "f(x) = cos(x)", tipo: "trigonométrica", explicacion: "La función coseno es parte de las funciones trigonométricas básicas." },
+      { expresion: "f(x) = tan(x)", tipo: "trigonométrica", explicacion: "La tangente es una función trigonométrica que se define como sin(x)/cos(x)." },
+      { expresion: "f(x) = 2^x", tipo: "exponencial", explicacion: "Es una función exponencial porque la variable x está en el exponente." },
+      { expresion: "f(x) = e^x", tipo: "exponencial", explicacion: "El número e elevado a x es una función exponencial natural." },
+      { expresion: "f(x) = (1/2)^x", tipo: "exponencial", explicacion: "Cualquier número positivo elevado a x es una función exponencial." },
+      { expresion: "f(x) = 3^x", tipo: "exponencial", explicacion: "La base 3 elevada a x indica que es una función exponencial." },
+      { expresion: "f(x) = 5^x", tipo: "exponencial", explicacion: "Función exponencial con base 5." },
+      { expresion: "f(x) = cos(x) + sin(x)", tipo: "trigonométrica", explicacion: "Es una combinación de funciones seno y coseno, ambas trigonométricas." },
+      { expresion: "f(x) = tan(x) - sin(x)", tipo: "trigonométrica", explicacion: "La resta de funciones trigonométricas sigue siendo una función trigonométrica." },
+      { expresion: "f(x) = (1/3)^x", tipo: "exponencial", explicacion: "La base fraccionaria elevada a x indica una función exponencial." }
+    ];
+
+    let funcionActual;
+
+    function nuevaPregunta() {
+      const index = Math.floor(Math.random() * funciones.length);
+      funcionActual = funciones[index];
+      document.getElementById("pregunta").textContent = `¿La función "${funcionActual.expresion}" es exponencial o trigonométrica?`;
+      document.getElementById("feedback").textContent = "";
+      document.getElementById("explicacion").textContent = "";
+    }
+
+    function verificar(respuesta) {
+      const correcto = funcionActual.tipo;
+      const feedback = document.getElementById("feedback");
+      const explicacion = document.getElementById("explicacion");
+      if (respuesta === correcto) {
+        feedback.textContent = "✅ ¡Correcto!";
+        feedback.style.color = "green";
+      } else {
+        feedback.textContent = `❌ Incorrecto. Era una función ${correcto}.`;
+        feedback.style.color = "red";
+      }
+      explicacion.textContent = funcionActual.explicacion;
+    }
+
+    nuevaPregunta();
+  </script>
+</body>
+</html>
